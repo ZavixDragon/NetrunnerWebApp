@@ -1,5 +1,6 @@
 ﻿using NetrunnerWebApp.Interfaces;
 using NetrunnerWebApp.Models;
+using Raven.Abstractions.Commands;
 using Raven.Client;
 using Raven.Client.Document;
 using System;
@@ -20,7 +21,7 @@ namespace NetrunnerWebApp.Services
             var docStore = new DocumentStore
             {
                 Url = "http://localhost:8080",
-                DefaultDatabase = "UserAccount"
+                DefaultDatabase = "UserAccounts"
             };
 
             docStore.Initialize();
@@ -29,41 +30,67 @@ namespace NetrunnerWebApp.Services
 
         public Task AddNewAccount(UserAccount userApplicant)
         {
-            Session.Store(userApplicant);
-            Session.SaveChanges();
+            userApplicant.Id = userApplicant.Username;
+            using (Session = Store.OpenSession())
+            {
+                Session.Store(userApplicant);
+                Session.SaveChanges();
+            }
             return Task.FromResult(true);
         }
 
         public Task ChangePassword(UserAccount currentUser, string newPassword)
         {
             currentUser.Password = newPassword;
-            Session.Store(currentUser);
-            Session.SaveChanges();
+            using (Session = Store.OpenSession())
+            {
+                Session.Store(currentUser);
+                Session.SaveChanges();
+            }
             return Task.FromResult(true);
         }
 
         public Task<UserAccount> GetAccountInfo(string username)
         {
-            return Task.FromResult((from userAccount in Session.Query<UserAccount>()
-                                    where userAccount.Username == username
-                                    select userAccount).Single());
+            using (Session = Store.OpenSession())
+            {
+                return Task.FromResult((from userAccount in Session.Query<UserAccount>()
+                                        where userAccount.Username == username
+                                        select userAccount).SingleOrDefault());
+            }
         }
 
         public Task<UserAccount> GetAccountInfoFromEmail(string email)
         {
-            return Task.FromResult((from userAccount in Session.Query<UserAccount>()
-                                    where userAccount.Email == email
-                                    select userAccount).Single());
+            using (Session = Store.OpenSession())
+            {
+                return Task.FromResult((from userAccount in Session.Query<UserAccount>()
+                                        where userAccount.Email == email
+                                        select userAccount).SingleOrDefault());
+            }
         }
 
-        public Task<bool> IsUsernameNotTaken(string username)
+        public async Task<bool> IsUsernameNotTaken(string username)
         {
-            return Task.FromResult(GetAccountInfo(username) == null);
+            UserAccount QueryResult = await GetAccountInfo(username);
+            return QueryResult == null;
         }
 
-        public Task<bool> IsEmailNotInUse(string email)
+        public async Task<bool> IsEmailNotInUse(string email)
         {
-            return Task.FromResult(GetAccountInfoFromEmail(email) == null);
+            UserAccount QueryResult = await GetAccountInfoFromEmail(email);
+            return QueryResult == null;
+        }
+
+        public Task DeleteUserAccount(string username)
+        {
+            using (Session = Store.OpenSession())
+            {
+                UserAccount targetAccount = Session.Load<UserAccount>(username);
+                Session.Delete(targetAccount);
+                Session.SaveChanges();
+            }
+            return Task.FromResult(true);
         }
     }
 }

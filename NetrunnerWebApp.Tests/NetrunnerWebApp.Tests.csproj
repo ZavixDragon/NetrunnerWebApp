@@ -73,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RandompasswordGeneratorTest.cs" />
     <Compile Include="Services\BootstrapTest.cs" />
+    <Compile Include="Services\UserAccountRavenDbTest.cs" />
     <Compile Include="Services\UserAccountEmailerTest.cs" />
     <Compile Include="Services\UserAccountAuthenticatorTest.cs" />
   </ItemGroup>
