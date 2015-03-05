@@ -10,19 +10,16 @@ namespace NetrunnerWebApp.Services
 {
     public class Bootstrap
     {
-        private EmailService emailer = new Emailer();
-        private UserAccountAuthenticatorService authenticator = new UserAccountAuthenticator();
-        private UserAccountDatabaseService database = new UserAccountRavenDb();
-        private UserAccountEmailService userAccountEmailer;
-        private RandomPasswordGeneratorService passwordGenerator = new RandomPasswordGenerator();
-        private UserAccountController controller;
         private IUnityContainer myContainer = new UnityContainer();
 
         public IUnityContainer GetContainer()
         {
-            userAccountEmailer = new UserAccountEmailer(emailer);
-            controller = new UserAccountController(database, userAccountEmailer, authenticator, passwordGenerator);
-            return myContainer.RegisterInstance<UserAccountController>(controller);
+            myContainer.RegisterType<EmailService, Emailer>();
+            myContainer.RegisterType<UserAccountDatabaseService, UserAccountRavenDb>();
+            myContainer.RegisterType<UserAccountAuthenticatorService, UserAccountAuthenticator>();
+            myContainer.RegisterType<RandomPasswordGeneratorService, RandomPasswordGenerator>();
+            myContainer.RegisterType<UserAccountEmailService, UserAccountEmailer>();
+            return myContainer;
         }
     }
 }
