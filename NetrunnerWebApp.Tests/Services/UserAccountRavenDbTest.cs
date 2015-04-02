@@ -47,51 +47,66 @@ namespace NetrunnerWebApp.Tests.Services
         }
 
         [TestMethod]
-        public void UserAccountRavenDb_AddNewAccount()
+        public async Task UserAccountRavenDb_DeleteAccount_ReturnNull()
         {
-            UserAccount user = new UserAccount { Username = username, Password = password, Email = email };
-            ravenDb.AddNewAccount(user);
+            await AddNewAccount();
+            await DeleteAccount();
+            UserAccount user = await ravenDb.GetAccountInfo(username);
+
+            Assert.IsNull(user);
         }
 
         [TestMethod]
         public async Task UserAccountRavenDb_GetAccountInfo_ReturnAddedAccount()
         {
+            await AddNewAccount();
             UserAccount user = await ravenDb.GetAccountInfo(username);
 
             Assert.IsNotNull(user);
+            await DeleteAccount();
         }
 
         [TestMethod]
         public async Task UserAccountRavenDb_GetAccountinfoFromEmail_ReturnAddedAccount()
         {
+            await AddNewAccount();
             UserAccount user = await ravenDb.GetAccountInfoFromEmail(email);
 
             Assert.IsNotNull(user);
+            await DeleteAccount();
         }
 
         [TestMethod]
         public async Task UserAccountRavenDb_IsUsernameNotTaken_ReturnFalse()
         {
+            await AddNewAccount();
             bool result = await ravenDb.IsUsernameNotTaken(username);
 
             Assert.IsFalse(result);
+            await DeleteAccount();
         }
 
         [TestMethod]
         public async Task UserAccountRavenDb_IsEmailNotInUse_ReturnFalse()
         {
+            await AddNewAccount();
             bool result = await ravenDb.IsEmailNotInUse(email);
 
             Assert.IsFalse(result);
+            await DeleteAccount();
         }
 
-        [TestMethod]
-        public async Task UserAccountRavenDb_DeleteAccount_ReturnNull()
+        private async Task AddNewAccount()
+        {
+            UserAccount user = new UserAccount { Username = username, Password = password, Email = email };
+            await ravenDb.AddNewAccount(user);
+
+        }
+
+        private async Task DeleteAccount()
         {
             await ravenDb.DeleteUserAccount(username);
-            UserAccount user = await ravenDb.GetAccountInfo(username);
-
-            Assert.IsNull(user);
         }
+
     }
 }

@@ -75,5 +75,17 @@ namespace NetrunnerWebApp.Controllers
             }
             return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
         }
+
+        public async Task<HttpResponseMessage> GetInAccount(UserAccount loginAttempt)
+        {
+            UserAccount actualUser = await AccountDBService.GetAccountInfo(loginAttempt.Username);
+            if(await Authenticator.IsPasswordAndUsernameCorrect(loginAttempt, actualUser))
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.Accepted);
+                message.Content = new StringContent(loginAttempt.Username);
+                return message;
+            }
+            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+        }
     }
 }

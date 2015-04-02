@@ -1,0 +1,17 @@
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\bin\Debug\NetrunnerWpfApp.exe.manifest
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\bin\Debug\NetrunnerWpfApp.xbap
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\bin\Debug\NetrunnerWpfApp.exe
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\bin\Debug\NetrunnerWpfApp.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\Page1.baml
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\Page1.g.cs
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\App.g.cs
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp_MarkupCompile.cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.g.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.TrustInfo.xml
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.exe.manifest
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.xbap
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.exe
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerWpfApp\obj\Debug\NetrunnerWpfApp.pdb

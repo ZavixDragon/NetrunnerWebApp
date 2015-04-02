@@ -33,12 +33,12 @@ namespace NetrunnerWebApp.Tests.Services
         }
 
         [TestMethod]
-        public void Bootstrap_GrabUserAccountControllerTwice_IsSameInstance()
+        public void Bootstrap_GrabUserAccountControllerTwice_IsDifferentInstance()
         {
             var controller = _container.Resolve<UserAccountController>();
             var controller2 = _container.Resolve<UserAccountController>();
 
-            Assert.AreEqual(controller, controller2);
+            Assert.AreNotEqual(controller, controller2);
         }
 
         [TestMethod]

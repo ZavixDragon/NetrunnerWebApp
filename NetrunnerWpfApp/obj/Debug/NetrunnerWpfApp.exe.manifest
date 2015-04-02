@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="NetrunnerWpfApp.exe" version="1.0.0.0" publicKeyToken="5831412632784445" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="NetrunnerWpfApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="NetrunnerWpfApp.exe" parameters="" />
+    <hostInBrowser xmlns="urn:schemas-microsoft-com:asm.v3" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="Internet" Description="Default rights given to Internet applications" ID="Custom" SameSite="site">
+          <IPermission version="1" class="System.Security.Permissions.FileDialogPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Access="Open" />
+          <IPermission UserQuota="1024000" version="1" class="System.Security.Permissions.IsolatedStorageFilePermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Allowed="ApplicationIsolationByUser" />
+          <IPermission version="1" class="System.Security.Permissions.SecurityPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Flags="Execution" />
+          <IPermission version="1" class="System.Security.Permissions.UIPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Clipboard="OwnClipboard" Window="SafeTopLevelWindows" />
+          <IPermission version="1" class="System.Drawing.Printing.PrintingPermission, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Level="SafePrinting" />
+          <IPermission version="1" class="System.Security.Permissions.MediaPermission, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Audio="SafeAudio" Image="SafeImage" Video="SafeVideo" />
+          <IPermission version="1" class="System.Security.Permissions.WebBrowserPermission, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Level="Safe" />
+        </PermissionSet>
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options
+            If you want to change the Windows User Account Control level replace the 
+            requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            If you want to utilize File and Registry Virtualization for backward 
+            compatibility then delete the requestedExecutionLevel node.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+      <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+        <application>
+          <!-- A list of all Windows versions that this application is designed to work with. 
+          Windows will automatically select the most compatible environment.-->
+          <!-- If your application is designed to work with Windows Vista, uncomment the following supportedOS node-->
+          <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"></supportedOS>-->
+          <!-- If your application is designed to work with Windows 7, uncomment the following supportedOS node-->
+          <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>-->
+          <!-- If your application is designed to work with Windows 8, uncomment the following supportedOS node-->
+          <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"></supportedOS>-->
+          <!-- If your application is designed to work with Windows 8.1, uncomment the following supportedOS node-->
+          <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>-->
+        </application>
+      </compatibility>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NetrunnerWpfApp.exe" size="10152">
+      <assemblyIdentity name="NetrunnerWpfApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ga6i4GPLcrILqUxbZFo9l6PtHntxxkks5K6MKIAL/xM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+<publisherIdentity name="CN=PALS\Administrator" issuerKeyHash="f5e0ff190fc932c3291a957722e2013e56818634" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>n8ZVChNOd5MY1RIaiO5qP/I+4SM=</DigestValue></Reference></SignedInfo><SignatureValue>Hcv9rH4xQGyRaKOBRCY3Oym1X8I0gImWZIqE8M8UsmGqqJV9D8Iqe9JGJqamVksQFAR98r59mfNNsm2RhrprNtXVzgIzrs+ZWGUjZz3vcw14WM8VR3avNTV3cDImNB+L5Mw2FiRfHUsj75T6X/Xlomf3uUqh3skgsZwufeF1Ioo=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>rqOI9GAdycPVRURESjan/PBN2XaiS9akZ127ls0XGx5zo7g6u9cE9awit/1T+x60dHd9xm9GBnYjy+MD/mL+vyDA22GkSjsnEWW6ODt1MLLw4niSYA6bv3cs7eCh6iMzKYG7L/UbVf2wYPB+zHOEsCOGY4CNgM1X8VRsyp9iCL0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="23e13ef23f6aee881a12d51893774e130a55c69f" Description="" Url=""><as:assemblyIdentity name="NetrunnerWpfApp.exe" version="1.0.0.0" publicKeyToken="5831412632784445" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=PALS\Administrator</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>jDOLaPbjLonZMlQyp1Al7Y9sxVQ=</DigestValue></Reference></SignedInfo><SignatureValue>oupjeeTzJj4PvTxCQk2NInEK7EsFQiSdZcP2QqHrLaaNtvmu81bFQkC84e99LzoqsBlYXScQxFwi47vmlhmY7CSPMwZw//eCKxSpESyaBGg90R9wS4M6pBI75Vv8Q4LWC51rPIpJQrpY49kqJyAsHNRm9ioDnxZQkSOFbj9HrYU=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>rqOI9GAdycPVRURESjan/PBN2XaiS9akZ127ls0XGx5zo7g6u9cE9awit/1T+x60dHd9xm9GBnYjy+MD/mL+vyDA22GkSjsnEWW6ODt1MLLw4niSYA6bv3cs7eCh6iMzKYG7L/UbVf2wYPB+zHOEsCOGY4CNgM1X8VRsyp9iCL0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB4TCCAUqgAwIBAgIQcq5u43DHLoVPe0gwvM3QrTANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDHiQAUABBAEwAUwBcAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIwHhcNMTUwMzEzMTY1NzMwWhcNMTYwMzEyMjI1NzMwWjAvMS0wKwYDVQQDHiQAUABBAEwAUwBcAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAK6jiPRgHcnD1UVEREo2p/zwTdl2okvWpGddu5bNFxsec6O4OrvXBPWsIrf9U/setHR3fcZvRgZ2I8vjA/5i/r8gwNthpEo7JxFlujg7dTCy8OJ4kmAOm793LO3goeojMymBuy/1G1X9sGDwfsxzhLAjhmOAjYDNV/FUbMqfYgi9AgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAby2u5Ztuzgjoq40ncIRZA5URJ1IPSaRqyOuBhIbx+z3dTAmNAmPQ9WLkeZ2cS2/Ju2tHmjaa9JQ7sdulVbobxzAhhkpktHRDlCupg9VdRsA/MENIgpABhF8z88ulTJC450n7LyE2wNH+vu2uI2GWrfMyWcsjv7id7O6JzFeYFco=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

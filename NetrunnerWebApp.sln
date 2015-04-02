@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerWebApp", "Netrunne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerWebApp.Tests", "NetrunnerWebApp.Tests\NetrunnerWebApp.Tests.csproj", "{BC749FD3-2C7D-4A91-984B-DC73F976BE0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerUserApp", "NetrunnerUserApp\NetrunnerUserApp.csproj", "{974B97D2-1D26-4A6A-8909-9DDC365A70F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerUserApp.Tests", "NetrunnerUserApp.Tests\NetrunnerUserApp.Tests.csproj", "{C834C72A-31D6-4AE8-A272-B64D89C8D459}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{BC749FD3-2C7D-4A91-984B-DC73F976BE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC749FD3-2C7D-4A91-984B-DC73F976BE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC749FD3-2C7D-4A91-984B-DC73F976BE0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{974B97D2-1D26-4A6A-8909-9DDC365A70F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974B97D2-1D26-4A6A-8909-9DDC365A70F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974B97D2-1D26-4A6A-8909-9DDC365A70F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974B97D2-1D26-4A6A-8909-9DDC365A70F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

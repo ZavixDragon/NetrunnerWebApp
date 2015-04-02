@@ -4,6 +4,7 @@ using NetrunnerWebApp.Interfaces;
 using NetrunnerWebApp.Models;
 using Rhino.Mocks;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NetrunnerWebApp.Tests.Controllers
@@ -139,6 +140,33 @@ namespace NetrunnerWebApp.Tests.Controllers
             var response = await controller.PostNewPassword(TestUserAccount, newPassword);
 
             Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task UserAccountController_LoginWithWrongInputs_ReturnErrorMessage()
+        {
+            _databaseServiceStub.Stub(s => s.GetAccountInfo(Arg<string>.Is.Anything)).Return(Task.FromResult(new UserAccount()));
+            _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
+                .Return(Task.FromResult(false));
+
+            var response = await controller.GetInAccount(TestUserAccount);
+
+            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task UserAccountController_LoginWithCorrectInputs_ReturnUserId()
+        {
+            _databaseServiceStub.Stub(s => s.GetAccountInfo(Arg<string>.Is.Anything)).Return(Task.FromResult(new UserAccount()));
+            _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
+                .Return(Task.FromResult(true));
+
+            var response = await controller.GetInAccount(TestUserAccount);
+            string responseContent = await response.Content.ReadAsStringAsync();
+            
+
+            Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
+            Assert.AreEqual(testUsername, responseContent);
         }
 
         private void SetupBlankTasksToAvoidNullExceptions()

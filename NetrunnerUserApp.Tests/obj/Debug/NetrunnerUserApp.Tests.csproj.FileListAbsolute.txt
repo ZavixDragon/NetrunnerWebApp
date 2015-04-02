@@ -1,0 +1,13 @@
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\obj\Debug\NetrunnerUserApp.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\NetrunnerUserApp.Tests.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\NetrunnerUserApp.Tests.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\NetrunnerUserApp.exe
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\NetrunnerUserApp.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\obj\Debug\NetrunnerUserApp.Tests.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\obj\Debug\NetrunnerUserApp.Tests.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\obj\Debug\NetrunnerUserApp.Tests.Resources.TestResources.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\obj\Debug\NetrunnerUserApp.Tests.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\Rhino.Mocks.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\Rhino.Mocks.xml
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp.Tests\bin\Debug\Microsoft.Practices.Unity.xml
