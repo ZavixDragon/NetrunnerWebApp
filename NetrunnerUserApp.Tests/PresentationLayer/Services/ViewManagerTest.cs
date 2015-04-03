@@ -22,7 +22,7 @@ namespace NetrunnerUserApp.Tests.PresentationLayer.Services
         [TestMethod]
         public void ViewManager_GetViewLoginPage_ReturnNonNullPage()
         {
-            _manager.Register(new LoginPage(null), "LoginPage");
+            _manager.Register(new LoginPage(null, null), "LoginPage");
 
             object view = _manager.GetView("LoginPage");
 
