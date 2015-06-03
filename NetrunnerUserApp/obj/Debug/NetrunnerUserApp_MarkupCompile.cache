@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\NetrunnerUserApp\App.xaml
-31405091461
+5301565317
 
-141736540887
-66290096191
-PresentationLayer\Views\LoginPage.xaml;PresentationLayer\Views\MainWindow.xaml;PresentationLayer\Views\NullPage.xaml;
+38-301417469
+72-756859998
+PresentationLayer\Views\DeckBuilderPage.xaml;PresentationLayer\Views\MainWindow.xaml;PresentationLayer\Views\NullPage.xaml;PresentationLayer\Views\AdmittancePage.xaml;PresentationLayer\Views\UpdatingPage.xaml;
 
 False
 

@@ -60,17 +60,24 @@
   </Choose>
   <ItemGroup>
     <Compile Include="PresentationLayer\Services\ImageProviderTest.cs" />
-    <Compile Include="PresentationLayer\Services\ViewManagerTest.cs" />
-    <Compile Include="PresentationLayer\ViewModels\LoginPageViewModelTest.cs" />
+    <Compile Include="PresentationLayer\Services\UserInputValidaterTest.cs" />
+    <Compile Include="PresentationLayer\ViewModels\AdmittancePageViewModelTest.cs" />
+    <Compile Include="PresentationLayer\ViewModels\DeckBuilderPageViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\TestResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\XmlIoServiceTest.cs" />
+    <Compile Include="TestAssertions\ExceptionAssert.cs" />
     <Compile Include="TestTools\ImageComparer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainObjects\DomainObjects.csproj">
+      <Project>{18173e5f-e287-4162-994c-dac46adb27eb}</Project>
+      <Name>DomainObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetrunnerUserApp\NetrunnerUserApp.csproj">
       <Project>{974b97d2-1d26-4a6a-8909-9ddc365a70f1}</Project>
       <Name>NetrunnerUserApp</Name>
@@ -83,7 +90,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TestImage.jpg" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TestImage.png" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

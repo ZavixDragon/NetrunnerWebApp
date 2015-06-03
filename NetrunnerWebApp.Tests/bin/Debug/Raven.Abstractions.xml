@@ -6661,6 +6661,14 @@
             <param name="converters">A collection converters used while serializing.</param>
             <returns>A JSON string representation of the object.</returns>
         </member>
+        <member name="M:Raven.Imports.Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,Raven.Imports.Newtonsoft.Json.JsonConverterCollection)">
+            <summary>
+            Serializes the specified object to a JSON string using a collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/>.
+            </summary>
+            <param name="value">The object to serialize.</param>
+            <param name="converters">A collection converters used while serializing.</param>
+            <returns>A JSON string representation of the object.</returns>
+        </member>
         <member name="M:Raven.Imports.Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,Raven.Imports.Newtonsoft.Json.Formatting,Raven.Imports.Newtonsoft.Json.JsonConverter[])">
             <summary>
             Serializes the specified object to a JSON string using formatting and a collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/>.
@@ -6830,6 +6838,15 @@
             <returns>The deserialized object from the JSON string.</returns>
         </member>
         <member name="M:Raven.Imports.Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Type,Raven.Imports.Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Deserializes the JSON to the specified .NET type using a collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/>.
+            </summary>
+            <param name="value">The JSON to deserialize.</param>
+            <param name="type">The type of the object to deserialize.</param>
+            <param name="converters">Converters to use while deserializing.</param>
+            <returns>The deserialized object from the JSON string.</returns>
+        </member>
+        <member name="M:Raven.Imports.Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Type,Raven.Imports.Newtonsoft.Json.JsonConverterCollection)">
             <summary>
             Deserializes the JSON to the specified .NET type using a collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/>.
             </summary>
@@ -9307,6 +9324,16 @@
             Path to local folder. If not empty, backups will be held in this folder and not deleted. Otherwise, backups will be created in DataDir of a database and deleted after successful upload to Glacier/S3/Azure.
             </summary>
         </member>
+        <member name="P:Raven.Abstractions.Data.PeriodicExportSetup.AzureRemoteFolderName">
+            <summary>
+            Path to remote azure folder.
+            </summary>
+        </member>
+        <member name="P:Raven.Abstractions.Data.PeriodicExportSetup.S3RemoteFolderName">
+            <summary>
+            Path to remote azure folder.
+            </summary>
+        </member>
         <member name="P:Raven.Abstractions.Data.PeriodicExportSetup.IntervalMilliseconds">
             <summary>
             Interval between incremental backups in milliseconds. If set to null or 0 then incremental periodic export will be disabled.
@@ -9761,6 +9788,11 @@
             Indicates if database supports DTC transactions.
             </summary>
         </member>
+        <member name="P:Raven.Abstractions.Data.DatabaseStatistics.Is64Bit">
+            <summary>
+            Indicates if process is 64-bit
+            </summary>
+        </member>
         <member name="P:Raven.Abstractions.Data.Facet.Mode">
             <summary>
             Mode of a facet (Default, Ranges).
@@ -10090,7 +10122,7 @@
             Only relevant during indexing phases, and not available on the client
             </summary>
         </member>
-        <member name="M:Raven.Abstractions.Data.JsonDocument.ToJson">
+        <member name="M:Raven.Abstractions.Data.JsonDocument.ToJson(System.Boolean)">
             <summary>
             Translate the json document to a <see cref="T:Raven.Json.Linq.RavenJObject"/>
             </summary>
@@ -10230,6 +10262,12 @@
         <member name="P:Raven.Abstractions.Data.MoreLikeThisQuery.IndexName">
             <summary>
             The name of the index to use for this operation
+            </summary>
+        </member>
+        <member name="P:Raven.Abstractions.Data.MoreLikeThisQuery.AdditionalQuery">
+            <summary>
+            An additional query that the matching documents need to also
+            match to be returned. 
             </summary>
         </member>
         <member name="P:Raven.Abstractions.Data.MoreLikeThisQuery.MapGroupFields">
@@ -10892,6 +10930,31 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null. </exception>
             <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0). </exception>
         </member>
+        <member name="M:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException"/> class.
+            </summary>
+        </member>
+        <member name="M:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner.</param>
+        </member>
+        <member name="M:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Raven.Abstractions.Exceptions.ImplicitFetchFieldsFromDocumentNotAllowedException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
         <member name="P:Raven.Abstractions.Exceptions.IndexCompilationException.IndexDefinitionProperty">
             <summary>
             Indicates which property caused error (Maps, Reduce).
@@ -11161,7 +11224,12 @@
         </member>
         <member name="P:Raven.Abstractions.FileSystem.FileSystemDocument.Id">
             <summary>
-            The ID can be either the file system name ("FilesystemName") or the full document name ("Raven/Filesystems/FilesystemName").
+            The ID can be either the file system name ("FilesystemName") or the full document name ("Raven/FileSystems/FilesystemName").
+            </summary>
+        </member>
+        <member name="P:Raven.Abstractions.FileSystem.SynchronizationDestinationsConfig.Destinations">
+            <summary>
+            Gets or sets the list of synchronization destinations.
             </summary>
         </member>
         <member name="P:Raven.Abstractions.Indexing.TransformerDefinition.TransformResults">
@@ -11535,6 +11603,13 @@
             <param name="converters">A collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/> which will be used when writing the token.</param>
             <returns>The JSON for this token using the given formatting and converters.</returns>
         </member>
+        <member name="M:Raven.Json.Linq.RavenJToken.WriteTo(Raven.Imports.Newtonsoft.Json.JsonWriter,Raven.Imports.Newtonsoft.Json.JsonConverterCollection)">
+            <summary>
+                Writes this token to a <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/>.
+            </summary>
+            <param name="writer">A <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/> into which this method will write.</param>
+            <param name="converters">A collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/> which will be used when writing the token.</param>
+        </member>
         <member name="M:Raven.Json.Linq.RavenJToken.WriteTo(Raven.Imports.Newtonsoft.Json.JsonWriter,Raven.Imports.Newtonsoft.Json.JsonConverter[])">
             <summary>
                 Writes this token to a <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/>.
@@ -11874,6 +11949,13 @@
             <param name="json">A <see cref="T:System.String"/> that contains JSON.</param>
             <returns>A <see cref="T:Raven.Json.Linq.RavenJArray"/> populated from the string that contains JSON.</returns>
         </member>
+        <member name="M:Raven.Json.Linq.RavenJArray.WriteTo(Raven.Imports.Newtonsoft.Json.JsonWriter,Raven.Imports.Newtonsoft.Json.JsonConverterCollection)">
+            <summary>
+            Writes this token to a <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/>.
+            </summary>
+            <param name="writer">A <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/> into which this method will write.</param>
+            <param name="converters">A collection of <see cref="T:Raven.Imports.Newtonsoft.Json.JsonConverter"/> which will be used when writing the token.</param>
+        </member>
         <member name="M:Raven.Json.Linq.RavenJArray.WriteTo(Raven.Imports.Newtonsoft.Json.JsonWriter,Raven.Imports.Newtonsoft.Json.JsonConverter[])">
             <summary>
             Writes this token to a <see cref="T:Raven.Imports.Newtonsoft.Json.JsonWriter"/>.
@@ -11974,12 +12056,12 @@
             </summary>
             <value></value>
         </member>
-        <member name="T:Raven.Json.Linq.RavenJTokenEqualityComparer">
+        <member name="T:Raven.Abstractions.Json.Linq.RavenJTokenEqualityComparer">
             <summary>
             Compares tokens to determine whether they are equal.
             </summary>
         </member>
-        <member name="M:Raven.Json.Linq.RavenJTokenEqualityComparer.Equals(Raven.Json.Linq.RavenJToken,Raven.Json.Linq.RavenJToken,System.Collections.Generic.List{Raven.Abstractions.Data.DocumentsChanges})">
+        <member name="M:Raven.Abstractions.Json.Linq.RavenJTokenEqualityComparer.Equals(Raven.Json.Linq.RavenJToken,Raven.Json.Linq.RavenJToken,System.Collections.Generic.List{Raven.Abstractions.Data.DocumentsChanges})">
             <summary>
             Determines whether the specified objects are equal.
             </summary>
@@ -11990,7 +12072,7 @@
             true if the specified objects are equal; otherwise, false.
             </returns>
         </member>
-        <member name="M:Raven.Json.Linq.RavenJTokenEqualityComparer.GetHashCode(Raven.Json.Linq.RavenJToken)">
+        <member name="M:Raven.Abstractions.Json.Linq.RavenJTokenEqualityComparer.GetHashCode(Raven.Json.Linq.RavenJToken)">
             <summary>
             Returns a hash code for the specified object.
             </summary>
@@ -13529,6 +13611,11 @@
             Should we exclude any documents which have already expired by checking the expiration meta property created by the expiration bundle
             </summary>
         </member>
+        <member name="P:Raven.Abstractions.Smuggler.SmugglerDatabaseOptions.ShouldDisableVersioningBundle">
+            <summary>
+            It allows to turn off versioning bundle for the duration of the import
+            </summary>
+        </member>
         <member name="P:Raven.Abstractions.Smuggler.SmugglerDatabaseOptions.NoneDefualtFileName">
             <summary>
             When set ovverides the default document name.
@@ -13537,6 +13624,11 @@
         <member name="P:Raven.Abstractions.Smuggler.SmugglerDatabaseOptions.MaxStepsForTransformScript">
             <summary>
             Maximum number of steps that transform script can have
+            </summary>
+        </member>
+        <member name="P:Raven.Abstractions.Smuggler.SmugglerFilesOptions.NoneDefualtFileName">
+            <summary>
+            When set ovverides the default document name.
             </summary>
         </member>
         <member name="P:Raven.Abstractions.Smuggler.SmugglerBetweenOptions`1.IncrementalKey">

@@ -1,0 +1,5 @@
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\bin\Debug\DomainObjects.dll
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\bin\Debug\DomainObjects.pdb
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\obj\Debug\DomainObjects.csprojResolveAssemblyReference.cache
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\obj\Debug\DomainObjects.dll
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\obj\Debug\DomainObjects.pdb

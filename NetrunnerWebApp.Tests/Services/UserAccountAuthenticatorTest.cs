@@ -2,6 +2,7 @@
 using NetrunnerWebApp.Services;
 using NetrunnerWebApp.Models;
 using System.Threading.Tasks;
+using DomainObjects;
 
 namespace NetrunnerTracker.WebTest.Services
 {

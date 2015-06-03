@@ -9,6 +9,6 @@ namespace NetrunnerUserApp.PresentationLayer.Interfaces
 {
     public interface ImageProvider
     {
-        Task<Image> GetImage(string name);
+        Image GetImage(string name);
     }
 }

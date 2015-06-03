@@ -38,6 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -48,17 +52,21 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.3.0.3599\lib\net45\Raven.Abstractions.dll</HintPath>
+      <HintPath>..\packages\RavenDB.Client.3.0.3690\lib\net45\Raven.Abstractions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Client.Lightweight, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.3.0.3599\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <HintPath>..\packages\RavenDB.Client.3.0.3690\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
@@ -78,6 +86,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -86,6 +98,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -93,27 +121,152 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Resource Include="Resources\AccountSiphon.png" />
+    <Resource Include="Resources\AcceleratedBetaTest.png" />
+    <Resource Include="Resources\AccessToGlobalsec.png" />
+    <Resource Include="Resources\AdonisCampaign.png" />
+    <Resource Include="Resources\AesopsPawnshop.png" />
+    <Resource Include="Resources\AggressiveNegotiation.png" />
+    <Resource Include="Resources\AggressiveSecretary.png" />
+    <Resource Include="Resources\AkamatsuMemChip.png" />
+    <Resource Include="Resources\AkitaroWatanabe.png" />
+    <Resource Include="Resources\AnonymousTip.png" />
+    <Resource Include="Resources\Archer.png" />
+    <Resource Include="Resources\ArchivedMemories.png" />
+    <Resource Include="Resources\ArmitageCodebusting.png" />
+    <Resource Include="Resources\AstroscriptPilotProgram.png" />
+    <Resource Include="Resources\Aurora.png" />
+    <Resource Include="Resources\BankJob.png" />
+    <Resource Include="Resources\BatteringRam.png" />
+    <Resource Include="Resources\BeanstalkRoyalties.png" />
+    <Resource Include="Resources\BioticLabor.png" />
+    <Resource Include="Resources\BreakingNews.png" />
+    <Resource Include="Resources\CellPortal.png" />
+    <Resource Include="Resources\Chum.png" />
+    <Resource Include="Resources\ClosedAccounts.png" />
+    <Resource Include="Resources\CorporateTroubleshooter.png" />
+    <Resource Include="Resources\Corroder.png" />
+    <Resource Include="Resources\CrashSpace.png" />
+    <Resource Include="Resources\Crypsis.png" />
+    <Resource Include="Resources\Cyberfeeder.png" />
+    <Resource Include="Resources\DataDealer.png" />
+    <Resource Include="Resources\DataMine.png" />
+    <Resource Include="Resources\DataRaven.png" />
+    <Resource Include="Resources\Datasucker.png" />
+    <Resource Include="Resources\Decoy.png" />
+    <Resource Include="Resources\DejaVu.png" />
+    <Resource Include="Resources\DemolitionRun.png" />
+    <Resource Include="Resources\Desperado.png" />
+    <Resource Include="Resources\Diesel.png" />
+    <Resource Include="Resources\Djinn.png" />
+    <Resource Include="Resources\EasyMark.png" />
+    <Resource Include="Resources\Enigma.png" />
+    <Resource Include="Resources\ExperientialData.png" />
+    <Resource Include="Resources\FemmeFatale.png" />
+    <Resource Include="Resources\ForgedActivationOrders.png" />
+    <Resource Include="Resources\GabrielSantiagoConsummateProfessional.png" />
+    <Resource Include="Resources\GhostBranch.png" />
+    <Resource Include="Resources\GordianBlade.png" />
+    <Resource Include="Resources\Grimoire.png" />
+    <Resource Include="Resources\HaasBioroidEngineeringTheFuture.png" />
+    <Resource Include="Resources\HadriansWall.png" />
+    <Resource Include="Resources\HedgeFund.png" />
+    <Resource Include="Resources\HostileTakeover.png" />
+    <Resource Include="Resources\Hunter.png" />
+    <Resource Include="Resources\IceCarver.png" />
+    <Resource Include="Resources\IceWall.png" />
+    <Resource Include="Resources\Infiltration.png" />
+    <Resource Include="Resources\InsideJob.png" />
+    <Resource Include="Resources\JintekiPersonalEvolution.png" />
+    <Resource Include="Resources\KateMacMcCaffreyDigitalTinker.png" />
+    <Resource Include="Resources\LemuriaCodecracker.png" />
+    <Resource Include="Resources\MagnumOpus.png" />
+    <Resource Include="Resources\MatrixAnalyzer.png" />
+    <Resource Include="Resources\Medium.png" />
+    <Resource Include="Resources\MelangeMiningCorp.png" />
+    <Resource Include="Resources\Mimic.png" />
+    <Resource Include="Resources\Modded.png" />
+    <Resource Include="Resources\NBNMakingNews.png" />
+    <Resource Include="Resources\NetShield.png" />
+    <Resource Include="Resources\NeuralEmp.png" />
+    <Resource Include="Resources\NeuralKatana.png" />
+    <Resource Include="Resources\Ninja.png" />
+    <Resource Include="Resources\NiseiMkII.png" />
+    <Resource Include="Resources\NoiseHackerExtraordinaire.png" />
+    <Resource Include="Resources\PadCampaign.png" />
+    <Resource Include="Resources\Parasite.png" />
+    <Resource Include="Resources\Pipeline.png" />
+    <Resource Include="Resources\PostedBounty.png" />
+    <Resource Include="Resources\Precognition.png" />
+    <Resource Include="Resources\PriorityRequisition.png" />
+    <Resource Include="Resources\PrivateSecurityForce.png" />
+    <Resource Include="Resources\ProjectJunebug.png" />
+    <Resource Include="Resources\Psychographics.png" />
+    <Resource Include="Resources\RabbitHole.png" />
+    <Resource Include="Resources\RedHerrings.png" />
+    <Resource Include="Resources\ResearchStation.png" />
+    <Resource Include="Resources\Rototurret.png" />
+    <Resource Include="Resources\SacrificialConstruct.png" />
+    <Resource Include="Resources\SanSanCityGrid.png" />
+    <Resource Include="Resources\ScorchedEarth.png" />
+    <Resource Include="Resources\SEASource.png" />
+    <Resource Include="Resources\SecuritySubcontract.png" />
+    <Resource Include="Resources\Shadow.png" />
+    <Resource Include="Resources\ShipmentFromKaguya.png" />
+    <Resource Include="Resources\ShipmentFromMirrormorph.png" />
+    <Resource Include="Resources\SneakdoorBeta.png" />
+    <Resource Include="Resources\SpecialOrder.png" />
+    <Resource Include="Resources\Stimhack.png" />
+    <Resource Include="Resources\SureGamble.png" />
+    <Resource Include="Resources\TheMakersEye.png" />
+    <Resource Include="Resources\ThePersonalTouch.png" />
+    <Resource Include="Resources\TheToolbox.png" />
+    <Resource Include="Resources\Tinkering.png" />
+    <Resource Include="Resources\Tollbooth.png" />
+    <Resource Include="Resources\WallOfStatic.png" />
+    <Resource Include="Resources\WallOfThorns.png" />
+    <Resource Include="Resources\WeylandConsortiumBuildingABetterWorld.png" />
+    <Resource Include="Resources\Wyldside.png" />
+    <Resource Include="Resources\Wyrm.png" />
+    <Resource Include="Resources\ZaibatsuLoyalty.png" />
+    <None Include="Resources\Viktor10.png" />
+    <None Include="Resources\Yog0.png" />
+    <None Include="Resources\Heimdall10.png" />
+    <None Include="Resources\Ichi10.png" />
+    <None Include="Resources\Snare.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\NetrunnerCollectionController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\CardService.cs" />
     <Compile Include="Interfaces\EmailService.cs" />
     <Compile Include="Interfaces\RandomPasswordGeneratorService.cs" />
     <Compile Include="Interfaces\UserAccountAuthenticatorService.cs" />
     <Compile Include="Interfaces\UserAccountDatabaseService.cs" />
     <Compile Include="Interfaces\UserAccountEmailService.cs" />
+    <Compile Include="Models\NetrunnerCardDictionary.cs" />
     <Compile Include="Models\Mail.cs" />
-    <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\CardImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardImages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Bootstrap.cs" />
     <Compile Include="Services\Emailer.cs" />
+    <Compile Include="Services\NetrunnerCardDictionaryService.cs" />
     <Compile Include="Services\RandomPasswordGenerator.cs" />
     <Compile Include="Services\UnityResolver.cs" />
     <Compile Include="Services\UserAccountAuthenticator.cs" />
@@ -134,6 +287,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainObjects\DomainObjects.csproj">
+      <Project>{18173e5f-e287-4162-994c-dac46adb27eb}</Project>
+      <Name>DomainObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CardImages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CardImages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

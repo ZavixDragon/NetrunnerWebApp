@@ -6,35 +6,53 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>c:\NetrunnerWebApp</_PublishTargetUrl>
+    <_PublishTargetUrl>c:\inetpub\wwwroot\NetrunnerWebApp</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/DomainObjects.dll">
+      <publishTime>04/21/2015 15:55:31</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>04/03/2015 16:40:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.dll">
+      <publishTime>04/03/2015 16:40:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
+      <publishTime>04/03/2015 16:40:32</publishTime>
+    </File>
     <File Include="bin/NetrunnerWebApp.dll">
-      <publishTime>02/24/2015 14:56:43</publishTime>
+      <publishTime>04/21/2015 15:55:32</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>02/22/2015 20:13:24</publishTime>
+      <publishTime>04/03/2015 16:40:21</publishTime>
+    </File>
+    <File Include="bin/Raven.Abstractions.dll">
+      <publishTime>04/03/2015 16:40:31</publishTime>
+    </File>
+    <File Include="bin/Raven.Client.Lightweight.dll">
+      <publishTime>04/03/2015 16:40:31</publishTime>
     </File>
     <File Include="bin/Rhino.Mocks.dll">
-      <publishTime>02/24/2015 12:07:23</publishTime>
+      <publishTime>04/03/2015 16:40:31</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>02/22/2015 20:13:29</publishTime>
+      <publishTime>04/03/2015 16:40:21</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>02/22/2015 20:13:30</publishTime>
+      <publishTime>04/03/2015 16:40:21</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>02/22/2015 20:13:30</publishTime>
+      <publishTime>04/03/2015 16:40:21</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>02/22/2015 20:13:23</publishTime>
+      <publishTime>04/03/2015 15:10:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/24/2015 12:07:24</publishTime>
+      <publishTime>04/03/2015 15:55:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/24/2015 14:56:44</publishTime>
+      <publishTime>04/09/2015 14:55:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,13 +1,10 @@
-﻿using NetrunnerWebApp.Interfaces;
-using NetrunnerWebApp.Models;
-using Raven.Abstractions.Commands;
+﻿using DomainObjects;
+using NetrunnerWebApp.Interfaces;
 using Raven.Client;
 using Raven.Client.Document;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace NetrunnerWebApp.Services
 {
@@ -54,9 +51,10 @@ namespace NetrunnerWebApp.Services
         {
             using (Session = Store.OpenSession())
             {
-                return Task.FromResult((from userAccount in Session.Query<UserAccount>()
-                                        where userAccount.Username == username
-                                        select userAccount).SingleOrDefault());
+                UserAccount user = ((from userAccount in Session.Query<UserAccount>()
+                                     where userAccount.Username == username
+                                     select userAccount).SingleOrDefault()) ?? new UserAccount();
+                return Task.FromResult(user);
             }
         }
 
@@ -64,22 +62,23 @@ namespace NetrunnerWebApp.Services
         {
             using (Session = Store.OpenSession())
             {
-                return Task.FromResult((from userAccount in Session.Query<UserAccount>()
-                                        where userAccount.Email == email
-                                        select userAccount).SingleOrDefault());
+                UserAccount user = ((from userAccount in Session.Query<UserAccount>()
+                                     where userAccount.Email == email
+                                     select userAccount).SingleOrDefault()) ?? new UserAccount();
+                return Task.FromResult(user);
             }
         }
 
-        public async Task<bool> IsUsernameNotTaken(string username)
+        public async Task<bool> IsUsernameTaken(string username)
         {
             UserAccount QueryResult = await GetAccountInfo(username);
-            return QueryResult == null;
+            return QueryResult.Username != null;
         }
 
-        public async Task<bool> IsEmailNotInUse(string email)
+        public async Task<bool> IsEmailTaken(string email)
         {
             UserAccount QueryResult = await GetAccountInfoFromEmail(email);
-            return QueryResult == null;
+            return QueryResult.Username != null;
         }
 
         public Task DeleteUserAccount(string username)

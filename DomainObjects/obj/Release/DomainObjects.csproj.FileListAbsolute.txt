@@ -1,0 +1,4 @@
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\bin\Release\DomainObjects.dll
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\bin\Release\DomainObjects.pdb
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\obj\Release\DomainObjects.dll
+C:\Users\TheoConfidor\Documents\Visual Studio 2013\Projects\NetrunnerWebApp\DomainObjects\obj\Release\DomainObjects.pdb

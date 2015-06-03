@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetrunnerWebApp.Services;
 using NetrunnerWebApp.Models;
 using System.Threading.Tasks;
+using DomainObjects;
 
 namespace NetrunnerWebApp.Tests.Services
 {
@@ -19,7 +20,7 @@ namespace NetrunnerWebApp.Tests.Services
         {
             UserAccount NonExistentUser = await ravenDb.GetAccountInfo(username);
 
-            Assert.IsNull(NonExistentUser);
+            Assert.IsNull(NonExistentUser.Username);
         }
 
         [TestMethod]
@@ -27,23 +28,23 @@ namespace NetrunnerWebApp.Tests.Services
         {
             UserAccount NonExistentUser = await ravenDb.GetAccountInfoFromEmail(email);
 
-            Assert.IsNull(NonExistentUser);
+            Assert.IsNull(NonExistentUser.Username);
         }
 
         [TestMethod]
-        public async Task UserAccountRavenDb_IsUsernameNotTaken_ReturnTrue()
+        public async Task UserAccountRavenDb_IsUsernameTaken_ReturnFalse()
         {
-            bool result = await ravenDb.IsUsernameNotTaken(username);
+            bool result = await ravenDb.IsUsernameTaken(username);
 
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public async Task UserAccountRavenDb_IsEmailNotInUse_ReturnTrue()
+        public async Task UserAccountRavenDb_IsEmailTaken_ReturnFalse()
         {
-            bool result = await ravenDb.IsEmailNotInUse(email);
+            bool result = await ravenDb.IsEmailTaken(email);
 
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -53,16 +54,16 @@ namespace NetrunnerWebApp.Tests.Services
             await DeleteAccount();
             UserAccount user = await ravenDb.GetAccountInfo(username);
 
-            Assert.IsNull(user);
+            Assert.IsNull(user.Username);
         }
 
         [TestMethod]
         public async Task UserAccountRavenDb_GetAccountInfo_ReturnAddedAccount()
-        {
+       {
             await AddNewAccount();
             UserAccount user = await ravenDb.GetAccountInfo(username);
 
-            Assert.IsNotNull(user);
+            Assert.IsNotNull(user.Username);
             await DeleteAccount();
         }
 
@@ -72,27 +73,27 @@ namespace NetrunnerWebApp.Tests.Services
             await AddNewAccount();
             UserAccount user = await ravenDb.GetAccountInfoFromEmail(email);
 
-            Assert.IsNotNull(user);
+            Assert.IsNotNull(user.Username);
             await DeleteAccount();
         }
 
         [TestMethod]
-        public async Task UserAccountRavenDb_IsUsernameNotTaken_ReturnFalse()
+        public async Task UserAccountRavenDb_IsUsernameTaken_ReturnTrue()
         {
             await AddNewAccount();
-            bool result = await ravenDb.IsUsernameNotTaken(username);
+            bool result = await ravenDb.IsUsernameTaken(username);
 
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
             await DeleteAccount();
         }
 
         [TestMethod]
-        public async Task UserAccountRavenDb_IsEmailNotInUse_ReturnFalse()
+        public async Task UserAccountRavenDb_IsEmailTaken_ReturnTrue()
         {
             await AddNewAccount();
-            bool result = await ravenDb.IsEmailNotInUse(email);
+            bool result = await ravenDb.IsEmailTaken(email);
 
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
             await DeleteAccount();
         }
 
@@ -100,7 +101,6 @@ namespace NetrunnerWebApp.Tests.Services
         {
             UserAccount user = new UserAccount { Username = username, Password = password, Email = email };
             await ravenDb.AddNewAccount(user);
-
         }
 
         private async Task DeleteAccount()

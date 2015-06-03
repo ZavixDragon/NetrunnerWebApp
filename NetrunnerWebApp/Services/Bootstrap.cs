@@ -19,6 +19,7 @@ namespace NetrunnerWebApp.Services
             myContainer.RegisterType<UserAccountAuthenticatorService, UserAccountAuthenticator>();
             myContainer.RegisterType<RandomPasswordGeneratorService, RandomPasswordGenerator>();
             myContainer.RegisterType<UserAccountEmailService, UserAccountEmailer>();
+            myContainer.RegisterType<CardService, NetrunnerCardDictionaryService>();
             return myContainer;
         }
     }

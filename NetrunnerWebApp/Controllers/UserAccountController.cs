@@ -1,18 +1,17 @@
-﻿using NetrunnerWebApp.Interfaces;
+﻿using DomainObjects;
+using NetrunnerWebApp.Interfaces;
 using NetrunnerWebApp.Models;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace NetrunnerWebApp.Controllers
 {
     public class UserAccountController : ApiController
     {
-        public int GetAll()
-        {
-            return 9;
-        }
 
         private UserAccountDatabaseService AccountDBService;
         private UserAccountEmailService Emailer;
@@ -30,62 +29,67 @@ namespace NetrunnerWebApp.Controllers
             PasswordGenerator = randomPasswordGeneratorService;
         }
 
-        public async Task<HttpResponseMessage> PostRegistration(UserAccount userApplicant)
+        [Route(Routes.SignUp)]
+        public async Task<HttpResponseMessage> RegisterAccount(UserAccount userApplicant)
         {
-            if (await AccountDBService.IsUsernameNotTaken(userApplicant.Username) && 
-                await AccountDBService.IsEmailNotInUse(userApplicant.Email))
-            {
-                await AccountDBService.AddNewAccount(userApplicant);
-                return new HttpResponseMessage(HttpStatusCode.Created);
-            }
-            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            if (await AccountDBService.IsEmailTaken(userApplicant.Email))
+                return StringResponse(SystemMessages.EmailAlreadyTaken);
+            if (await AccountDBService.IsUsernameTaken(userApplicant.Username))
+                return StringResponse(SystemMessages.UsernameAlreadyTaken);
+            await AccountDBService.AddNewAccount(userApplicant);
+            return StringResponse(SystemMessages.SuccessfulRegister);
         }
 
-        public async Task<HttpResponseMessage> PutUsernameInEmail(string email)
+        [Route(Routes.RecoverUsername)]
+        public async Task<HttpResponseMessage> RecoverUsername(object email)
         {
-            UserAccount currentUser = await AccountDBService.GetAccountInfoFromEmail(email);
+            var currentUser = await AccountDBService.GetAccountInfoFromEmail(email as string);
             if (currentUser.Username != null)
             {
-                await Emailer.EmailUsername(email, currentUser.Username);
-                return new HttpResponseMessage(HttpStatusCode.Accepted);
+                await Emailer.EmailUsername(email as string, currentUser.Username);
+                return StringResponse(SystemMessages.UsernameRecovered);
             }
-            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            return StringResponse(SystemMessages.NonExistentEmail);
         }
 
-        public async Task<HttpResponseMessage> PostGeneratedPassword(string email)
+        [Route(Routes.ResetPassword)]
+        public async Task<HttpResponseMessage> GenerateNewPassword(object email)
         {
-            UserAccount currentUser = await AccountDBService.GetAccountInfoFromEmail(email);
-            if(currentUser.Username != null)
+            var currentUser = await AccountDBService.GetAccountInfoFromEmail(email as string);
+            if (currentUser.Username != null)
             {
                 string newPassword = await PasswordGenerator.GeneratePassword();
                 await AccountDBService.ChangePassword(currentUser, newPassword);
-                await Emailer.EmailNewPassword(email, newPassword);
-                return new HttpResponseMessage(HttpStatusCode.Accepted);
+                await Emailer.EmailNewPassword(email as string, newPassword);
+                return StringResponse(SystemMessages.PasswordWasReset);
             }
-            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            return StringResponse(SystemMessages.NonExistentEmail);
         }
 
-        public async Task<HttpResponseMessage> PostNewPassword(UserAccount currentUser, string newPassword)
+        [Route(Routes.ChangePassword)]
+        public async Task<HttpResponseMessage> ChangePassword(UserAccount currentUser, object newPassword)
         {
-            UserAccount actualUser = await AccountDBService.GetAccountInfo(currentUser.Username);
-            if(await Authenticator.IsPasswordAndUsernameCorrect(currentUser, actualUser))
+            var actualUser = await AccountDBService.GetAccountInfo(currentUser.Username);
+            if (Authenticator.IsPasswordAndUsernameCorrect(currentUser, actualUser))
             {
-                await AccountDBService.ChangePassword(currentUser, newPassword);
-                return new HttpResponseMessage(HttpStatusCode.Accepted);
+                await AccountDBService.ChangePassword(currentUser, newPassword as string);
+                return StringResponse(SystemMessages.PasswordUpdated);
             }
-            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            return StringResponse(SystemMessages.InvalidPassword);
         }
 
-        public async Task<HttpResponseMessage> GetInAccount(UserAccount loginAttempt)
+        [Route(Routes.Login)]
+        public async Task<HttpResponseMessage> AttemptLogin(UserAccount loginAttempt)
         {
-            UserAccount actualUser = await AccountDBService.GetAccountInfo(loginAttempt.Username);
-            if(await Authenticator.IsPasswordAndUsernameCorrect(loginAttempt, actualUser))
-            {
-                var message = new HttpResponseMessage(HttpStatusCode.Accepted);
-                message.Content = new StringContent(loginAttempt.Username);
-                return message;
-            }
-            return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            var actualUser = await AccountDBService.GetAccountInfo(loginAttempt.Username);
+            if (Authenticator.IsPasswordAndUsernameCorrect(loginAttempt, actualUser))
+                return StringResponse(loginAttempt.Username);
+            return StringResponse(SystemMessages.InvalidLogin);
+        }
+
+        private HttpResponseMessage StringResponse(string value)
+        {
+            return new HttpResponseMessage { Content = new ObjectContent<StringObject>(new StringObject(value), new JsonMediaTypeFormatter()) };
         }
     }
 }

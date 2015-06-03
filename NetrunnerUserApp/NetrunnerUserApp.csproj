@@ -43,9 +43,17 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,13 +71,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PresentationLayer\Interfaces\ViewContainerService.cs" />
-    <Compile Include="PresentationLayer\Services\ViewContainer.cs" />
+    <Compile Include="Entities\ViewFactoryKeys.cs" />
+    <Compile Include="Gateway\NetrunnerGateway.cs" />
+    <Compile Include="Interfaces\GatewayService.cs" />
+    <Compile Include="Interfaces\IInitializable.cs" />
+    <Compile Include="Interfaces\IoService.cs" />
+    <Compile Include="Interfaces\UpdaterService.cs" />
+    <Compile Include="PresentationLayer\Entities\AsyncDelegateCommand.cs" />
+    <Compile Include="PresentationLayer\Entities\NetrunnerCards.cs" />
+    <Compile Include="PresentationLayer\Entities\ViewDisplayValues.cs" />
+    <Compile Include="PresentationLayer\Entities\CommandName.cs" />
+    <Compile Include="PresentationLayer\Entities\LoginCommandMode.cs" />
+    <Compile Include="PresentationLayer\Entities\RecoverUsernameCommandMode.cs" />
+    <Compile Include="PresentationLayer\Entities\ResetPasswordCommandMode.cs" />
+    <Compile Include="PresentationLayer\Entities\SignUpCommandMode.cs" />
+    <Compile Include="PresentationLayer\Entities\ViewModelCommandMode.cs" />
+    <Compile Include="PresentationLayer\Interfaces\InputValidaterService.cs" />
+    <Compile Include="PresentationLayer\Interfaces\ViewManagerService.cs" />
+    <Compile Include="PresentationLayer\Services\NotificationObject.cs" />
+    <Compile Include="PresentationLayer\Services\UserInputValidater.cs" />
+    <Compile Include="PresentationLayer\Services\EnhancedViewFactory.cs" />
+    <Compile Include="PresentationLayer\ViewModels\AdmittancePageViewModel.cs" />
+    <Compile Include="PresentationLayer\ViewModels\DeckBuilderPageViewModel.cs" />
+    <Compile Include="PresentationLayer\ViewModels\UpdatingPageViewModel.cs" />
+    <Compile Include="PresentationLayer\Views\DeckBuilderPage.xaml.cs">
+      <DependentUpon>DeckBuilderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Views\NullPage.xaml.cs">
       <DependentUpon>NullPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\Bootstrap.cs" />
-    <Page Include="PresentationLayer\Views\LoginPage.xaml">
+    <Compile Include="PresentationLayer\Views\AdmittancePage.xaml.cs">
+      <DependentUpon>AdmittancePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SecurityToken.cs" />
+    <Compile Include="PresentationLayer\Views\UpdatingPage.xaml.cs">
+      <DependentUpon>UpdatingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\CardUpdater.cs" />
+    <Compile Include="Services\XmlIoService.cs" />
+    <Page Include="PresentationLayer\Views\DeckBuilderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,15 +124,19 @@
     <Compile Include="PresentationLayer\Interfaces\ImageProvider.cs" />
     <Compile Include="PresentationLayer\Services\ImageConverter.cs" />
     <Compile Include="PresentationLayer\Services\EmbeddedResourceImageProvider.cs" />
-    <Compile Include="PresentationLayer\ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="PresentationLayer\Views\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PresentationLayer\Views\NullPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PresentationLayer\Views\AdmittancePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PresentationLayer\Views\UpdatingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +160,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <Resource Include="PresentationLayer\Resources\PasswordFont.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,13 +172,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PresentationLayer\Resources\TitleImage.png" />
-    <EmbeddedResource Include="PresentationLayer\Resources\LoginButtonImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="PresentationLayer\Resources\RegisterButtonImage.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PresentationLayer\Resources\ImageNotFound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainObjects\DomainObjects.csproj">
+      <Project>{18173e5f-e287-4162-994c-dac46adb27eb}</Project>
+      <Name>DomainObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

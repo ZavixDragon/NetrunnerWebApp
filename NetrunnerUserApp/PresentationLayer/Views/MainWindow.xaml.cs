@@ -1,4 +1,5 @@
 ﻿using NetrunnerUserApp.PresentationLayer.Interfaces;
+using NetrunnerUserApp.PresentationLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,9 @@ namespace NetrunnerUserApp.PresentationLayer.Views
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(ViewContainerService viewManager)
+        public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.NavigationService.Navigate(viewManager.GetView("LoginPage"));
         }
     }
 }

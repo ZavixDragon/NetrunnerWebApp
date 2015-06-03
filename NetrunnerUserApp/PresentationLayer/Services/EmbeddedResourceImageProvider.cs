@@ -19,7 +19,7 @@ namespace NetrunnerUserApp.PresentationLayer.Services
             }
         }
 
-        public async Task<Image> GetImage(string name)
+        public Image GetImage(string name)
         {
             var paths = Assembly.GetExecutingAssembly().GetManifestResourceNames()
                 .Where(x => x.Contains(name));

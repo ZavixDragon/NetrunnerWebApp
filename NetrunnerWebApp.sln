@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerUserApp", "Netrunn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetrunnerUserApp.Tests", "NetrunnerUserApp.Tests\NetrunnerUserApp.Tests.csproj", "{C834C72A-31D6-4AE8-A272-B64D89C8D459}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainObjects", "DomainObjects\DomainObjects.csproj", "{18173E5F-E287-4162-994C-DAC46ADB27EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C834C72A-31D6-4AE8-A272-B64D89C8D459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18173E5F-E287-4162-994C-DAC46ADB27EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18173E5F-E287-4162-994C-DAC46ADB27EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18173E5F-E287-4162-994C-DAC46ADB27EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18173E5F-E287-4162-994C-DAC46ADB27EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

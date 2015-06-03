@@ -1035,6 +1035,14 @@
             Gets the number of requests for this session
             </summary>
         </member>
+        <member name="P:Raven.Client.FileSystem.IAdvancedFilesSessionOperations.UseOptimisticConcurrency">
+            <summary>
+            Gets or sets a value indicating whether the session should use optimistic concurrency.
+            When set to <c>true</c>, a check is made so that a change made behind the session back would fail
+            and raise <see cref="T:Raven.Abstractions.Exceptions.ConcurrencyException"/>.
+            </summary>
+            <value></value>
+        </member>
         <member name="M:Raven.Client.FileSystem.AsyncFilesSession.#ctor(Raven.Client.FileSystem.FilesStore,Raven.Client.FileSystem.IAsyncFilesCommands,Raven.Client.FileSystem.FilesSessionListeners,System.Guid)">
             <summary>
             Initializes a new instance of the <see cref="T:Raven.Client.FileSystem.AsyncFilesSession"/> class.
@@ -1065,7 +1073,7 @@
         </member>
         <member name="P:Raven.Client.FileSystem.IAsyncFilesCommands.Admin">
             <summary>
-            Admin operations for current database
+            Admin operations
             </summary>
         </member>
         <member name="P:Raven.Client.FileSystem.IAsyncFilesCommands.Configuration">
@@ -1334,9 +1342,28 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Raven.Client.FileSystem.IAsyncFilesQueryBase`2.Take(System.Int32)">
+            <summary>
+              Takes the specified count.
+            </summary>
+            <param name = "count">The count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Client.FileSystem.IAsyncFilesQueryBase`2.Skip(System.Int32)">
+            <summary>
+              Skips the specified count.
+            </summary>
+            <param name = "count">The count.</param>
+            <returns></returns>
+        </member>
         <member name="P:Raven.Client.FileSystem.IAsyncFilesQueryBase`2.Conventions">
             <summary>
             Gets the files convention from the query session
+            </summary>
+        </member>
+        <member name="M:Raven.Client.FileSystem.IAsyncFilesQuery`1.RegisterResultsForDeletion">
+            <summary>
+              Deletes the files matching the query.
             </summary>
         </member>
         <member name="M:Raven.Client.FileSystem.IAsyncFilesOrderedQueryBase`2.ThenBy(System.String[])">
@@ -1606,6 +1633,18 @@
             </summary>
             <param name = "propertySelectors">Property selectors for the fields.</param>
         </member>
+        <member name="M:Raven.Client.FileSystem.AsyncFilesQuery`1.Raven#Client#FileSystem#IAsyncFilesQueryBase{T@Raven#Client#FileSystem#IAsyncFilesQuery{T}}#Take(System.Int32)">
+            <summary>
+              Takes the specified count.
+            </summary>
+            <param name = "count">The count.</param>
+        </member>
+        <member name="M:Raven.Client.FileSystem.AsyncFilesQuery`1.Raven#Client#FileSystem#IAsyncFilesQueryBase{T@Raven#Client#FileSystem#IAsyncFilesQuery{T}}#Skip(System.Int32)">
+            <summary>
+              Skips the specified count.
+            </summary>
+            <param name = "count">The count.</param>
+        </member>
         <member name="T:Raven.Client.FileSystem.FilesQueryStatistics">
             <summary>
             Statistics about a the files query.
@@ -1674,6 +1713,11 @@
             Gets or sets the default max number of requests per session.
             </summary>
             <value>The max number of requests per session.</value>
+        </member>
+        <member name="P:Raven.Client.FileSystem.FilesConvention.DefaultUseOptimisticConcurrency">
+            <summary>
+            Whether UseOptimisticConcurrency is set to true by default for all opened sessions
+            </summary>
         </member>
         <member name="T:Raven.Client.FileSystem.IFilesStore">
             <summary>
@@ -1820,7 +1864,7 @@
             </summary>
             <param name="local">The file in conflict in its local version</param>
             <param name="remote">The file in conflict in its remote version</param>
-            <param name="sourceServerUri">The Destination Uri where the conflict appeared</param>
+            <param name="sourceServerUri">The source file system URL that tried to synchronize a file to a destination where the conflict appeared</param>
             <returns>A resolution strategy for this conflict</returns>
         </member>
         <member name="M:Raven.Client.FileSystem.Listeners.IFilesConflictListener.ConflictResolved(Raven.Abstractions.FileSystem.FileHeader)">
@@ -1902,6 +1946,11 @@
             <summary>
              Selects the shard ids appropriate for the specified data.
              </summary><returns>Return a list of shards ids that will be search. Returning null means search all shards.</returns>
+        </member>
+        <member name="P:Raven.Client.Util.HttpClientCache.MaxIdleTime">
+            <summary>
+            The maximum idle time to keep a connection in the cache
+            </summary>
         </member>
         <member name="T:Raven.Client.Indexes.RavenMethodAttribute">
             <summary>
@@ -2953,45 +3002,45 @@
             </summary>
             <param name="operationsHeaders">The operations headers.</param>
         </member>
-        <member name="T:Raven.Client.Connection.HttpJsonRequest">
+        <member name="T:Raven.Client.Connection.Implementation.HttpJsonRequest">
             <summary>
             A representation of an HTTP json request to the RavenDB server
             </summary>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequest.ReadResponseJsonAsync">
+        <member name="M:Raven.Client.Connection.Implementation.HttpJsonRequest.ReadResponseJsonAsync">
             <summary>
             Begins the read response string.
             </summary>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequest.AddOperationHeaders(System.Collections.Specialized.NameValueCollection)">
+        <member name="M:Raven.Client.Connection.Implementation.HttpJsonRequest.AddOperationHeaders(System.Collections.Specialized.NameValueCollection)">
             <summary>
             Adds the operation headers.
             </summary>
             <param name="operationsHeaders">The operations headers.</param>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequest.AddOperationHeader(System.String,System.String)">
+        <member name="M:Raven.Client.Connection.Implementation.HttpJsonRequest.AddOperationHeader(System.String,System.String)">
             <summary>
             Adds the operation header.
             </summary>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequest.CalculateDuration">
+        <member name="M:Raven.Client.Connection.Implementation.HttpJsonRequest.CalculateDuration">
             <summary>
             The request duration
             </summary>
         </member>
-        <member name="P:Raven.Client.Connection.HttpJsonRequest.ResponseHeaders">
+        <member name="P:Raven.Client.Connection.Implementation.HttpJsonRequest.ResponseHeaders">
             <summary>
             Gets or sets the response headers.
             </summary>
             <value>The response headers.</value>
         </member>
-        <member name="P:Raven.Client.Connection.HttpJsonRequest.ResponseStatusCode">
+        <member name="P:Raven.Client.Connection.Implementation.HttpJsonRequest.ResponseStatusCode">
             <summary>
             Gets or sets the response status code.
             </summary>
             <value>The response status code.</value>
         </member>
-        <member name="P:Raven.Client.Connection.HttpJsonRequest.SkipServerCheck">
+        <member name="P:Raven.Client.Connection.Implementation.HttpJsonRequest.SkipServerCheck">
             <summary>
              Whatever we can skip the server check and directly return the cached result
             </summary>
@@ -3012,13 +3061,13 @@
             Creates the HTTP json request.
             </summary>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequestFactory.ResetCache">
+        <member name="M:Raven.Client.Connection.HttpJsonRequestFactory.ResetCache(System.Nullable{System.Int32})">
             <summary>
             Reset the number of cached requests and clear the entire cache
             Mostly used for testing
             </summary>
         </member>
-        <member name="M:Raven.Client.Connection.HttpJsonRequestFactory.#ctor(System.Int32,System.Net.Http.HttpMessageHandler,System.Boolean)">
+        <member name="M:Raven.Client.Connection.HttpJsonRequestFactory.#ctor(System.Int32,System.Func{System.Net.Http.HttpMessageHandler},System.Boolean)">
             <summary>
             default ctor
             </summary>
@@ -3085,6 +3134,7 @@
         <member name="P:Raven.Client.Connection.HttpJsonRequestFactory.EnableBasicAuthenticationOverUnsecuredHttpEvenThoughPasswordsWouldBeSentOverTheWireInClearTextToBeStolenByHackers">
             <summary>
             Advanced: Don't set this unless you know what you are doing!
+            
             
             Enable using basic authentication using http
             By default, RavenDB only allows basic authentication over HTTPS, setting this property to true
@@ -5421,9 +5471,19 @@
             Callback to get the results of the query
             </summary>
         </member>
+        <member name="M:Raven.Client.Document.AbstractDocumentQuery`2.AfterStreamExecuted(Raven.Client.AfterStreamExecutedDelegate)">
+            <summary>
+            Callback to get the results of the stream
+            </summary>
+        </member>
         <member name="M:Raven.Client.Document.AbstractDocumentQuery`2.InvokeAfterQueryExecuted(Raven.Abstractions.Data.QueryResult)">
             <summary>
             Called externally to raise the after query executed callback
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Document.AbstractDocumentQuery`2.InvokeAfterStreamExecuted(Raven.Json.Linq.RavenJObject@)">
+            <summary>
+            Called externally to raise the after stream executed callback
             </summary>
         </member>
         <member name="M:Raven.Client.Document.AbstractDocumentQuery`2.GenerateIndexQuery(System.String)">
@@ -5545,6 +5605,11 @@
         <member name="M:Raven.Client.IDocumentQueryBase`2.AfterQueryExecuted(System.Action{Raven.Abstractions.Data.QueryResult})">
             <summary>
                 Callback to get the results of the query
+            </summary>
+        </member>
+        <member name="M:Raven.Client.IDocumentQueryBase`2.AfterStreamExecuted(Raven.Client.AfterStreamExecutedDelegate)">
+            <summary>
+                Callback to get the results of the stream
             </summary>
         </member>
         <member name="M:Raven.Client.IDocumentQueryBase`2.AndAlso">
@@ -5739,6 +5804,11 @@
             </summary>
         </member>
         <member name="M:Raven.Client.IDocumentQueryBase`2.InvokeAfterQueryExecuted(Raven.Abstractions.Data.QueryResult)">
+            <summary>
+                Called externally to raise the after query executed callback
+            </summary>
+        </member>
+        <member name="M:Raven.Client.IDocumentQueryBase`2.InvokeAfterStreamExecuted(Raven.Json.Linq.RavenJObject@)">
             <summary>
                 Called externally to raise the after query executed callback
             </summary>
@@ -7394,6 +7464,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Raven.Client.IDocumentStore.OpenAsyncSession(Raven.Client.Document.OpenSessionOptions)">
+            <summary>
+            Opens the async session with the specified options.
+            </summary>
+        </member>
         <member name="M:Raven.Client.IDocumentStore.OpenSession">
             <summary>
             Opens the session.
@@ -7408,6 +7483,16 @@
         <member name="M:Raven.Client.IDocumentStore.OpenSession(Raven.Client.Document.OpenSessionOptions)">
             <summary>
             Opens the session with the specified options.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.IDocumentStore.SideBySideExecuteIndex(Raven.Client.Indexes.AbstractIndexCreationTask,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation in side-by-side mode.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.IDocumentStore.SideBySideExecuteIndexAsync(Raven.Client.Indexes.AbstractIndexCreationTask,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation in side-by-side mode.
             </summary>
         </member>
         <member name="M:Raven.Client.IDocumentStore.ExecuteIndex(Raven.Client.Indexes.AbstractIndexCreationTask)">
@@ -7495,6 +7580,21 @@
         <member name="M:Raven.Client.DocumentStoreBase.ExecuteIndex(Raven.Client.Indexes.AbstractIndexCreationTask)">
             <summary>
             Executes the index creation.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.DocumentStoreBase.ExecuteIndexAsync(Raven.Client.Indexes.AbstractIndexCreationTask)">
+            <summary>
+            Executes the index creation.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.DocumentStoreBase.SideBySideExecuteIndex(Raven.Client.Indexes.AbstractIndexCreationTask,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation in side-by-side mode.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.DocumentStoreBase.SideBySideExecuteIndexAsync(Raven.Client.Indexes.AbstractIndexCreationTask,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation in side-by-side mode.
             </summary>
         </member>
         <member name="M:Raven.Client.DocumentStoreBase.ExecuteTransformer(Raven.Client.Indexes.AbstractTransformerCreationTask)">
@@ -8392,6 +8492,14 @@
                 null)
             </param>
         </member>
+        <member name="M:Raven.Client.IAsyncAdvancedSessionOperations.GetMetadataForAsync``1(``0)">
+            <summary>
+                Gets the metadata for the specified entity.
+                If the entity is transient, it will load the metadata from the store
+                and associate the current state of the entity with the metadata from the server.
+            </summary>
+            <param name="instance">The instance.</param>
+        </member>
         <member name="P:Raven.Client.IAsyncAdvancedSessionOperations.Eagerly">
             <summary>
                 Access the eager operations
@@ -8665,6 +8773,11 @@
         <member name="M:Raven.Client.Document.Async.AsyncDocumentSession.AsyncQuery``1(System.String,System.Boolean)">
             <summary>
             Create a new query for <typeparam name="T"/>
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Document.Async.AsyncDocumentSession.GetJsonDocumentAsync(System.String)">
+            <summary>
+            Get the json document by key from the store
             </summary>
         </member>
         <member name="P:Raven.Client.Document.Async.AsyncDocumentSession.AsyncDatabaseCommands">
@@ -12190,14 +12303,32 @@
             Loads the specifed attachment content during the indexing process
             </summary>
         </member>
+        <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.SideBySideExecute(Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation against the specified document store in side-by-side mode.
+            </summary>
+            <param name="store"></param>
+        </member>
         <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.Execute(Raven.Client.IDocumentStore)">
             <summary>
             Executes the index creation against the specified document store.
             </summary>
         </member>
+        <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.SideBySideExecute(Raven.Client.Connection.IDatabaseCommands,Raven.Client.Document.DocumentConvention,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation using in side-by-side mode.
+            </summary>
+            <param name="databaseCommands"></param>
+            <param name="documentConvention"></param>
+        </member>
         <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.Execute(Raven.Client.Connection.IDatabaseCommands,Raven.Client.Document.DocumentConvention)">
             <summary>
             Executes the index creation against the specified document database using the specified conventions
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.SideBySideExecuteAsync(Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Executes the index creation against the specified document store in side-by-side mode.
             </summary>
         </member>
         <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.ExecuteAsync(Raven.Client.IDocumentStore)">
@@ -12228,6 +12359,13 @@
         <member name="P:Raven.Client.Indexes.AbstractIndexCreationTask.Conventions">
             <summary>
             Gets or sets the conventions that should be used when index definition is created.
+            </summary>
+        </member>
+        <member name="P:Raven.Client.Indexes.AbstractIndexCreationTask.Priority">
+            <summary>
+             index can have a priority that controls how much power of the indexing process it is allowed to consume. index priority can be forced by the user.
+             There are four available values that you can set: Normal, Idle, Disabled, Abandoned
+            <para>Default value: null means that the priority of the index is Normal.</para>
             </summary>
         </member>
         <member name="M:Raven.Client.Indexes.AbstractIndexCreationTask.SpatialIndex.Generate(System.String,System.Nullable{System.Double},System.Nullable{System.Double})">
@@ -13150,6 +13288,44 @@
             <param name="catalogToGetnIndexingTasksFrom">The catalog to get indexing tasks from.</param>
             <param name="documentStore">The document store.</param>
         </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexes(System.Reflection.Assembly,Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified assembly in side-by-side mode.
+            </summary>
+            <param name="assemblyToScanForIndexingTasks">The assembly to scan for indexing tasks.</param>
+            <param name="documentStore">The document store.</param>
+        </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexes(System.ComponentModel.Composition.Hosting.ExportProvider,Raven.Client.Connection.IDatabaseCommands,Raven.Client.Document.DocumentConvention,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified catalog in side-by-side mode.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexesAsync(System.ComponentModel.Composition.Hosting.ExportProvider,Raven.Client.Connection.Async.IAsyncDatabaseCommands,Raven.Client.Document.DocumentConvention,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified catalog in side-by-side mode.
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexes(System.ComponentModel.Composition.Hosting.ExportProvider,Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified catalog in side-by-side mode.
+            </summary>
+            <param name="catalogToGetnIndexingTasksFrom">The catalog to get indexing tasks from.</param>
+            <param name="documentStore">The document store.</param>
+        </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexesAsync(System.Reflection.Assembly,Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified assembly in side-by-side mode.
+            </summary>
+            <param name="assemblyToScanForIndexingTasks">The assembly to scan for indexing tasks.</param>
+            <param name="documentStore">The document store.</param>
+        </member>
+        <member name="M:Raven.Client.Indexes.IndexCreation.SideBySideCreateIndexesAsync(System.ComponentModel.Composition.Hosting.ExportProvider,Raven.Client.IDocumentStore,Raven.Abstractions.Data.Etag,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the indexes found in the specified catalog in side-by-side mode.
+            </summary>
+            <param name="catalogToGetnIndexingTasksFrom">The catalog to get indexing tasks from.</param>
+            <param name="documentStore">The document store.</param>
+        </member>
         <member name="T:Raven.Client.Indexes.IndexDefinitionBuilder`2">
             <summary>
             This class provides a way to define a strongly typed index on the client.
@@ -13336,6 +13512,11 @@
         <member name="M:Raven.Client.Linq.IRavenQueryProvider.AfterQueryExecuted(System.Action{Raven.Abstractions.Data.QueryResult})">
             <summary>
             Callback to get the results of the query
+            </summary>
+        </member>
+        <member name="M:Raven.Client.Linq.IRavenQueryProvider.AfterStreamExecuted(System.Action{Raven.Json.Linq.RavenJObject})">
+            <summary>
+            Callback to get the results of the stream
             </summary>
         </member>
         <member name="M:Raven.Client.Linq.IRavenQueryProvider.Customize(System.Action{Raven.Client.IDocumentQueryCustomization})">
@@ -13529,6 +13710,14 @@
         <member name="M:Raven.Client.LinqExtensions.ToFacetsLazy``1(System.Linq.IQueryable{``0},System.String,System.Int32,System.Nullable{System.Int32})">
             <summary>
             Lazily Query the facets results for this query using the specified facet document with the given start and pageSize
+            </summary>
+            <param name="facetSetupDoc">Name of the FacetSetup document</param>
+            <param name="start">Start index for paging</param>
+            <param name="pageSize">Paging PageSize. If set, overrides Facet.MaxResults</param>
+        </member>
+        <member name="M:Raven.Client.LinqExtensions.ToFacetsLazyAsync``1(System.Linq.IQueryable{``0},System.String,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            LazilyAsync Query the facets results for this query using the specified facet document with the given start and pageSize
             </summary>
             <param name="facetSetupDoc">Name of the FacetSetup document</param>
             <param name="start">Start index for paging</param>
@@ -14178,13 +14367,14 @@
             The index name
             </summary>
         </member>
-        <member name="M:Raven.Client.Linq.RavenQueryProviderProcessor`1.#ctor(Raven.Client.Linq.IDocumentQueryGenerator,System.Action{Raven.Client.IDocumentQueryCustomization},System.Action{Raven.Abstractions.Data.QueryResult},System.String,System.Collections.Generic.HashSet{System.String},System.Collections.Generic.List{Raven.Client.Linq.RenamedField},System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,Raven.Json.Linq.RavenJToken})">
+        <member name="M:Raven.Client.Linq.RavenQueryProviderProcessor`1.#ctor(Raven.Client.Linq.IDocumentQueryGenerator,System.Action{Raven.Client.IDocumentQueryCustomization},System.Action{Raven.Abstractions.Data.QueryResult},System.Action{Raven.Json.Linq.RavenJObject},System.String,System.Collections.Generic.HashSet{System.String},System.Collections.Generic.List{Raven.Client.Linq.RenamedField},System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,Raven.Json.Linq.RavenJToken})">
             <summary>
             Initializes a new instance of the <see cref="T:Raven.Client.Linq.RavenQueryProviderProcessor`1"/> class.
             </summary>
             <param name="queryGenerator">The document query generator.</param>
             <param name="customizeQuery">The customize query.</param>
             <param name="afterQueryExecuted">Executed after the query run, allow access to the query results</param>
+            <param name="afterStreamExecuted">Executed after the stream run, allow access to the stream results</param>
             <param name="indexName">The name of the index the query is executed against.</param>
             <param name="fieldsToFetch">The fields to fetch in this query</param>
             <param name="fieldsTRename">The fields to rename for the results of this query</param>
@@ -14593,6 +14783,11 @@
             Opens the async session.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Raven.Client.Shard.ShardedDocumentStore.OpenAsyncSession(Raven.Client.Document.OpenSessionOptions)">
+            <summary>
+            Opens the async session with the specified options.
+            </summary>
         </member>
         <member name="M:Raven.Client.Shard.ShardedDocumentStore.AggressivelyCacheFor(System.TimeSpan)">
             <summary>

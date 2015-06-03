@@ -1,7 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DomainObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetrunnerWebApp.Controllers;
 using NetrunnerWebApp.Interfaces;
 using NetrunnerWebApp.Models;
+using Newtonsoft.Json;
 using Rhino.Mocks;
 using System.Net;
 using System.Net.Http;
@@ -35,52 +37,49 @@ namespace NetrunnerWebApp.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task UserAccountController_RegisterAccountCorrectly_MethodsCalled()
+        public async Task UserAccountController_RegisterAccountCorrectly_AddNewAccountAndReturnsSuccessMessage()
         {
-            _databaseServiceStub.Stub(s => s.IsUsernameNotTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
-            _databaseServiceStub.Stub(s => s.IsEmailNotInUse(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
+            _databaseServiceStub.Stub(s => s.IsUsernameTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
+            _databaseServiceStub.Stub(s => s.IsEmailTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
 
-            var response = await controller.PostRegistration(TestUserAccount);
+            var response = await controller.RegisterAccount(TestUserAccount);
 
-            _databaseServiceStub.AssertWasCalled(s => s.IsUsernameNotTaken(testUsername));
-            _databaseServiceStub.AssertWasCalled(s => s.IsEmailNotInUse(testEmail));
             _databaseServiceStub.AssertWasCalled(s => s.AddNewAccount(Arg<UserAccount>.Is.Anything));
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.SuccessfulRegister, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_RegisterWithTakenUsername_ReturnErrorCode()
+        public async Task UserAccountController_RegisterWithTakenUsername_ReturnProperErrorMessage()
         {
-            _databaseServiceStub.Stub(s => s.IsUsernameNotTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
-            _databaseServiceStub.Stub(s => s.IsEmailNotInUse(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
+            _databaseServiceStub.Stub(s => s.IsUsernameTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
+            _databaseServiceStub.Stub(s => s.IsEmailTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
 
-            var response = await controller.PostRegistration(TestUserAccount);
+            var response = await controller.RegisterAccount(TestUserAccount);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.UsernameAlreadyTaken, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_RegisterWithUsedEmail_ReturnErrorCode()
+        public async Task UserAccountController_RegisterWithTakenEmail_ReturnProperErrorMessage()
         {
-            _databaseServiceStub.Stub(s => s.IsUsernameNotTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
-            _databaseServiceStub.Stub(s => s.IsEmailNotInUse(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
+            _databaseServiceStub.Stub(s => s.IsUsernameTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(false));
+            _databaseServiceStub.Stub(s => s.IsEmailTaken(Arg<string>.Is.Anything)).Return(Task.FromResult(true));
 
-            var response = await controller.PostRegistration(TestUserAccount);
+            var response = await controller.RegisterAccount(TestUserAccount);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.EmailAlreadyTaken, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_RecoverUsernameSuccessfully_MethodsCalled()
+        public async Task UserAccountController_RecoverUsernameSuccessfully_EmailerCalledAndSuccessMessage()
         {
             _databaseServiceStub.Stub(
                 s => s.GetAccountInfoFromEmail(Arg<string>.Is.Anything)).Return(Task.FromResult(TestUserAccount));
 
-            var response = await controller.PutUsernameInEmail(testEmail);
+            var response = await controller.RecoverUsername(testEmail);
 
-            _databaseServiceStub.AssertWasCalled(s => s.GetAccountInfoFromEmail(testEmail));
             _emailServiceStub.AssertWasCalled(s => s.EmailUsername(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
-            Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.UsernameRecovered, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
@@ -88,21 +87,20 @@ namespace NetrunnerWebApp.Tests.Controllers
         {
             _databaseServiceStub.Stub(s => s.GetAccountInfoFromEmail(Arg<string>.Is.Anything)).Return(Task.FromResult(new UserAccount()));
 
-            var response = await controller.PutUsernameInEmail(testEmail);
+            var response = await controller.RecoverUsername(testEmail);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.NonExistentEmail, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_ResetPasswordCorrectly_MethodsCalled()
+        public async Task UserAccountController_ResetPasswordCorrectly_EmailerCalledAndSuccessMessage()
         {
             _databaseServiceStub.Stub(s => s.GetAccountInfoFromEmail(Arg<string>.Is.Anything)).Return(Task.FromResult(TestUserAccount));
 
-            var response = await controller.PostGeneratedPassword(testEmail);
+            var response = await controller.GenerateNewPassword(testEmail);
 
-            _databaseServiceStub.AssertWasCalled(s => s.GetAccountInfoFromEmail(testEmail));
             _emailServiceStub.AssertWasCalled(s => s.EmailNewPassword(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
-            Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.PasswordWasReset, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
@@ -110,36 +108,34 @@ namespace NetrunnerWebApp.Tests.Controllers
         {
             _databaseServiceStub.Stub(s => s.GetAccountInfoFromEmail(Arg<string>.Is.Anything)).Return(Task.FromResult(new UserAccount()));
 
-            var response = await controller.PostGeneratedPassword(testEmail);
+            var response = await controller.GenerateNewPassword(testEmail);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.NonExistentEmail, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_ChangePasswordSuccessfully_MethodsCalled()
+        public async Task UserAccountController_ChangePasswordSuccessfully_ChangePasswordCalledAndSuccessMessage()
         {
             _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
                 .Return(Task.FromResult(true));
             _databaseServiceStub.Stub(s => s.GetAccountInfo(Arg<string>.Is.Anything)).Return(Task.FromResult(TestUserAccount));
 
-            var response = await controller.PostNewPassword(TestUserAccount, newPassword);
+            var response = await controller.ChangePassword(TestUserAccount, newPassword);
 
-            _databaseServiceStub.AssertWasCalled(s => s.GetAccountInfo(testUsername));
-            _authenticatorServiceStub.AssertWasCalled(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything));
             _databaseServiceStub.AssertWasCalled(s => s.ChangePassword(Arg<UserAccount>.Is.Anything, Arg<string>.Is.Anything));
-            Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.PasswordUpdated, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
-        public async Task UserAccountController_ChangePasswordForNonExistentUser_ReturnErrorMessage()
+        public async Task UserAccountController_ChangePasswordWithWrongPassword_ReturnErrorMessage()
         {
             _databaseServiceStub.Stub(s => s.GetAccountInfo(Arg<string>.Is.Anything)).Return(Task.FromResult(new UserAccount()));
             _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
                 .Return(Task.FromResult(false));
 
-            var response = await controller.PostNewPassword(TestUserAccount, newPassword);
+            var response = await controller.ChangePassword(TestUserAccount, newPassword);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.InvalidPassword, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
@@ -149,9 +145,9 @@ namespace NetrunnerWebApp.Tests.Controllers
             _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
                 .Return(Task.FromResult(false));
 
-            var response = await controller.GetInAccount(TestUserAccount);
+            var response = await controller.AttemptLogin(TestUserAccount);
 
-            Assert.AreEqual(HttpStatusCode.NotAcceptable, response.StatusCode);
+            await assertMessageCorrect(SystemMessages.InvalidLogin, await response.Content.ReadAsStringAsync());
         }
 
         [TestMethod]
@@ -161,12 +157,9 @@ namespace NetrunnerWebApp.Tests.Controllers
             _authenticatorServiceStub.Stub(s => s.IsPasswordAndUsernameCorrect(Arg<UserAccount>.Is.Anything, Arg<UserAccount>.Is.Anything))
                 .Return(Task.FromResult(true));
 
-            var response = await controller.GetInAccount(TestUserAccount);
-            string responseContent = await response.Content.ReadAsStringAsync();
-            
+            var response = await controller.AttemptLogin(TestUserAccount);
 
-            Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
-            Assert.AreEqual(testUsername, responseContent);
+            await assertMessageCorrect(testUsername, await response.Content.ReadAsStringAsync());
         }
 
         private void SetupBlankTasksToAvoidNullExceptions()
@@ -177,6 +170,12 @@ namespace NetrunnerWebApp.Tests.Controllers
             _emailServiceStub.Stub(s => s.EmailUsername(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(Task.FromResult(false));
             _emailServiceStub.Stub(s => s.EmailNewPassword(Arg<string>.Is.Anything, Arg<string>.Is.Anything)).Return(Task.FromResult(false));
             _randomPasswordGeneratorServiceStub.Stub(s => s.GeneratePassword()).Return(Task.FromResult(""));
+        }
+
+        private async Task assertMessageCorrect(string message, string JsonStringObject)
+        {
+            StringObject responseContent = await JsonConvert.DeserializeObjectAsync<StringObject>(JsonStringObject);
+            Assert.AreEqual(message, responseContent.Value);
         }
 
         private UserAccount TestUserAccount
